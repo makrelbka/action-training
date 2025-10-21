@@ -1,0 +1,35 @@
+# .github/workflows/deploy.yml
+name: Deploy to Self-Hosted
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # Твой runner
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Build Docker images
+        run: |
+          docker-compose build
+          docker images
+      
+      - name: Stop old containers
+        run: |
+          docker-compose down || true
+          docker system prune -f
+      
+      - name: Start application
+        run: |
+          docker-compose up -d
+          sleep 5
+          docker ps
+      
+      - name: Test application
+        run: |
+          curl -f http://localhost:5001/health || echo "Backend not ready"
+          curl -f http://localhost:5002 || echo "Frontend not ready"
