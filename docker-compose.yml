@@ -1,0 +1,10 @@
+version: '3'
+services: 
+  back:
+    build: ./back
+    ports:
+      - "5001:5001"
+  front:
+    build: ./front
+    ports:
+      - "5002:5002"

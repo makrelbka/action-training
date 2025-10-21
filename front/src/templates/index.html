@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head><title>Подсчет символов</title></head>
+<body>
+    <h1>Подсчет символов</h1>
+    <form method="post">
+        <input type="text" name="phrase" placeholder="Введите фразу" required>
+        <button type="submit">Подсчитать</button>
+    </form>
+    {% if result %}
+    <p>Результат: {{ result }}</p>
+    <p>Символов: {{ count }}</p>
+    {% endif %}
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
