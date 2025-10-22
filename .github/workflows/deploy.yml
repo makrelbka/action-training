@@ -34,10 +34,16 @@ jobs:
           curl -f http://localhost:5001/health || echo "Backend not ready"
           curl -f http://localhost:5002 || echo "Frontend not ready"
 
+      - name: Install Ansible
+        run: |
+          pip install ansible
+          ansible --version
+
       - name: Setup SSH key for Orange Pi
         run: |
           echo "${{ secrets.ORANGEPI_SSH_KEY }}" > /tmp/ssh_key
           chmod 600 /tmp/ssh_key
+          ssh-keyscan -H 192.168.1.100 >> ~/.ssh/known_hosts || true
 
       - name: Test connection to Orange Pi
         run: |
