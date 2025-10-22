@@ -3,7 +3,8 @@ all:
     orange_pi:
       hosts:
         orange-pi:
-          ansible_host: 192.168.1.100  
-          ansible_user: pi            
+          ansible_host: 37.153.12.157 
+          ansible_user: makrelbka
+          ansible_port: 7812            
           ansible_ssh_private_key_file: /tmp/ssh_key 
           ansible_ssh_common_args: '-o StrictHostKeyChecking=no'  

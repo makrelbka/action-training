@@ -38,7 +38,6 @@ jobs:
         run: |
           echo "${{ secrets.ORANGEPI_SSH_KEY }}" > /tmp/ssh_key
           chmod 600 /tmp/ssh_key
-          ssh-keyscan -H 192.168.1.100 >> ~/.ssh/known_hosts || true
 
       - name: Test connection to Orange Pi
         run: |
