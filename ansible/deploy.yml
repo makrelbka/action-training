@@ -1,0 +1,9 @@
+---
+- name: Test connection to Orange Pi
+  hosts: orange_pi
+  gather_facts: false
+  
+  tasks:
+    - name: Test SSH connection
+      ping:
+   

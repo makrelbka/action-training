@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted  # Твой runner
+    runs-on: self-hosted 
     
     steps:
       - name: Checkout code
@@ -33,3 +33,12 @@ jobs:
         run: |
           curl -f http://localhost:5001/health || echo "Backend not ready"
           curl -f http://localhost:5002 || echo "Frontend not ready"
+
+      - name: Setup SSH key for Orange Pi
+        run: |
+          echo "${{ secrets.ORANGEPI_SSH_KEY }}" > /tmp/ssh_key
+          chmod 600 /tmp/ssh_key
+
+      - name: Test connection to Orange Pi
+        run: |
+          ansible-playbook -i ansible/hosts.yaml ansible/deploy.yml
